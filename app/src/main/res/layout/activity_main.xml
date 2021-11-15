@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#3f51b5"
     tools:context=".MainActivity">
 
     <TextView
@@ -30,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.45">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/openButton"
             android:layout_width="40dp"
             android:layout_height="60dp"
@@ -41,7 +42,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/NumberPicker1" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/changePasswordButton"
             android:layout_width="10dp"
             android:layout_height="10dp"
