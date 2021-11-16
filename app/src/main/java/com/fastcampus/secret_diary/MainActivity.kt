@@ -87,14 +87,13 @@ class MainActivity : AppCompatActivity() {
             if (changePasswordMode)
             {
                 //번호를 저장하는 기능
-                passwordPreferences.edit{
+                passwordPreferences.edit(true){
                     //여기에 1. commit기능과 2. apply기능이 있는데
                     //1. commit은 파일을 다 저장할 때까지 UI를 다 멈추고 기다리는 기능
                     //2. apply기능은 저장할 기록을 남겨 놨다 이렇게 말하면서 비동기적으로 저장하는 방식
                     //여기선 제대로 저장이 될 때까지 block할거라 commit 쓸거임
+                    //맨 아래에 commit()을 쓰면 되늗네 이거 빼고 위에 edit를 -> edit(true)로 해도 똑같음
                     putString("password", passwordFromUser)
-                    commit()
-                    //commit()이거 빼고 위에 edit를 -> edit(true)로 해도 똑같음
                 }
 
                 changePasswordMode = false
