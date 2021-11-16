@@ -1,6 +1,7 @@
 package com.fastcampus.secret_diary
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -60,14 +61,13 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val passwordPreferences = getSharedPreferences("password", Context.MODE_PRIVATE)
+            val passwordPreferences = getSharedPreferences("passwordd", Context.MODE_PRIVATE)
             val passwordFromUser = "${numberPicker1.value}${numberPicker2.value}${numberPicker3.value}"
 
             //패스워드 성공
-            if(passwordPreferences.getString("password", "000").equals(passwordFromUser))
+            if(passwordPreferences.getString("passwordd", "000").equals(passwordFromUser))
             {
-                //Todo 다이어리 작성 후 넘겨주어야 함
-                //startActivity()
+                startActivity(Intent(this, DiaryActivity::class.java))
             }
 
             //패스워드 실패
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
         changePasswordButton.setOnClickListener {
 
-            val passwordPreferences = getSharedPreferences("password", Context.MODE_PRIVATE)
+            val passwordPreferences = getSharedPreferences("passwordd", Context.MODE_PRIVATE)
             val passwordFromUser = "${numberPicker1.value}${numberPicker2.value}${numberPicker3.value}"
 
             if (changePasswordMode)
@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                     //2. apply기능은 저장할 기록을 남겨 놨다 이렇게 말하면서 비동기적으로 저장하는 방식
                     //여기선 제대로 저장이 될 때까지 block할거라 commit 쓸거임
                     //맨 아래에 commit()을 쓰면 되늗네 이거 빼고 위에 edit를 -> edit(true)로 해도 똑같음
-                    putString("password", passwordFromUser)
+                    putString("passwordd", passwordFromUser)
                 }
 
                 changePasswordMode = false
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
                 //changePasswordMode가 활성화 -> 비밀번호가 맞는지를 체크 -> 비밀번호가 맞는 경우 체인지가 활성화가 되면 안되니까ㅋ
 
                 //현재 패스워드 확인 성공
-                if(passwordPreferences.getString("password", "000").equals(passwordFromUser))
+                if(passwordPreferences.getString("passwordd", "000").equals(passwordFromUser))
                 {
                     changePasswordMode = true
                     Toast.makeText(this, "변경할 패스워드를 입력해주세요", Toast.LENGTH_SHORT).show()

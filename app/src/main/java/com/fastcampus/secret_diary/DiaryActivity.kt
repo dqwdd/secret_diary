@@ -37,6 +37,14 @@ class DiaryActivity : AppCompatActivity() {
 
         //내용이 수정이 될 때마다 저장이 되도록 기능 구현
         diaryEditText.addTextChangedListener {
+            handler.removeCallbacks(runnable)//0.5초 이전에 아직 실행되지 않고 팬딩되어있는 runnable이 있다면 지워주기 위해 사용하는 함수임
+            //이렇게 쓰면 제일 처음에 addTextChangedListener에 들어왔을 때 이 이전에 있는 runnable이 있다면 지우고 없으면 뭐 없으니까 냅둠
+            //그러고 밑에 쓴 것 처럼 0.5초마다 runnable을 실행시키는 메시지를 핸들러에 전달
+            handler.postDelayed(runnable, 500)//500=0.5초임
+            //그러면 0.5초 이내에 리무브콜백이 실행되면 0.5초 전에 실행됬던 runnable은 삭제가 되고
+            //계속 그렇게 삭제 삭제 삭제 이렇게 뒤로 팬딩이 되다가
+            //마지막으로 0.5초 안에 새로운 텍스트 체인지가 일어나지 않으면
+            //그제서야 이 runnable이 실행이 되서 editText에 저장이 되는 기능이 수행이 됨
         }
 
     }
